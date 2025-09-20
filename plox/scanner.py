@@ -4,6 +4,8 @@ from pathlib import Path
 
 
 class Plox:
+
+    had_error = False
     
     def main(self, args: t.List[str]) -> IOError:
         if len(args) > 1:
@@ -19,6 +21,8 @@ class Plox:
         if canonical_path.exists():
             source_bytes = canonical_path.read_bytes()
             self.__run(source_bytes)
+
+            if self.had_error: sys.exit(65)
         else:
             raise IOError("Panic! File not found.")
     
@@ -28,6 +32,8 @@ class Plox:
                 input_buffer = input("> ")
                 if input_buffer == None: break
                 self.__run(input_buffer)
+                # if there is an error, the session shouldn't break
+                self.had_error = False
         except EOFError:
             print("\n")
             sys.exit(64)
@@ -40,3 +46,4 @@ class Plox:
     
     def _report(self, line: int, where: str, message: str) -> None:
         print("[line " + line + "] Error" + where + ": " + message)
+        self.had_error = True
