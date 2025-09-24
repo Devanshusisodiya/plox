@@ -47,3 +47,5 @@ class TokenType(Enum, str):
     TRUE = "true" 
     VAR = "var" 
     WHILE = "while"
+
+    EOF = "EOF"

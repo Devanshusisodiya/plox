@@ -1,49 +1,28 @@
-import sys
 import typing as t
-from pathlib import Path
+from plox.token_type import TokenType
+from plox.token import Token
 
+class Scanner:
+    def __init__(self, source: str):
+        self.source: str = source
+        self.tokens: t.List[Token] = []
 
-class Plox:
+        self.start = 0
+        self.current = 0
+        self.line = 1
 
-    had_error = False
-    
-    def main(self, args: t.List[str]) -> IOError:
-        if len(args) > 1:
-            print("Usage: plox [script]")
-            sys.exit(64)
-        elif len(args) == 1:
-            self.__run_file(args[0])
-        else:
-            self.__run_prompt()
+    def scan_tokens(self) -> t.List[Token]:
+        while not self.__is_at_end():
+            self.start = self.current
+            self.scan_token()
 
-    def __run_file(self, path: str) -> IOError:
-        canonical_path = Path(path)
-        if canonical_path.exists():
-            source_bytes = canonical_path.read_bytes()
-            self.__run(source_bytes)
+        self.tokens.append(Token(
+            type=TokenType.EOF,
+            lexeme="",
+            literal=None,
+            line=self.line
+        ))
+        return self.tokens
 
-            if self.had_error: sys.exit(65)
-        else:
-            raise IOError("Panic! File not found.")
-    
-    def __run_prompt(self) -> EOFError:
-        try:
-            while True:
-                input_buffer = input("> ")
-                if input_buffer == None: break
-                self.__run(input_buffer)
-                # if there is an error, the session shouldn't break
-                self.had_error = False
-        except EOFError:
-            print("\n")
-            sys.exit(64)
-    
-    def __run(self, source: str) -> None:
-        print(source) # Just print the source for now
-
-    def error(self, line: int,  message: str) -> None:
-        self._report(line, "", message)
-    
-    def _report(self, line: int, where: str, message: str) -> None:
-        print("[line " + line + "] Error" + where + ": " + message)
-        self.had_error = True
+    def __is_at_end(self) -> bool:
+        return self.current >= len(self.source)

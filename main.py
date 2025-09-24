@@ -1,5 +1,7 @@
 import sys
-from plox.scanner import Plox
+
+from plox.plox import Plox
+
 
 def main():
     plox = Plox()

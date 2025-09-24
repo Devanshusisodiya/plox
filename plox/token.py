@@ -1,12 +1,13 @@
 import typing as t
+
 from plox.token_type import TokenType
 
 class Token:
     def __init__(
-        self, 
-        type: TokenType, 
+        self,
+        type: TokenType,
         lexeme: str,
-        literal: t.Dict,
+        literal: t.Dict[str, t.Any] | None,
         line: int
     ):
         self.type = type
@@ -15,4 +16,4 @@ class Token:
         self.line = line
 
     def to_string(self) -> str:
-        return self.type + " " + self.lexeme + " " + self.literal
+        return self.type.value + " " + self.lexeme + " " + self.literal

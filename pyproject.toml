@@ -8,4 +8,5 @@ dependencies = [
     "black>=25.9.0",
     "isort>=6.0.1",
     "pyinstaller>=6.16.0",
+    "pytest>=8.4.2",
 ]

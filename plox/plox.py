@@ -6,8 +6,9 @@ from pathlib import Path
 class Plox:
 
     had_error = False
-    
+
     def main(self, args: t.List[str]) -> IOError:
+
         if len(args) > 1:
             print("Usage: plox [script]")
             sys.exit(64)
@@ -25,7 +26,7 @@ class Plox:
             if self.had_error: sys.exit(65)
         else:
             raise IOError("Panic! File not found.")
-    
+
     def __run_prompt(self) -> EOFError:
         try:
             while True:
@@ -37,13 +38,13 @@ class Plox:
         except EOFError:
             print("\n")
             sys.exit(64)
-    
+
     def __run(self, source: str) -> None:
         print(source) # Just print the source for now
 
     def error(self, line: int,  message: str) -> None:
         self._report(line, "", message)
-    
+
     def _report(self, line: int, where: str, message: str) -> None:
         print("[line " + line + "] Error" + where + ": " + message)
         self.had_error = True
