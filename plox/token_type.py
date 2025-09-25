@@ -3,11 +3,11 @@ from enum import Enum
 
 class TokenType(Enum, str):
     # Single-character tokens.
-    LEFT_PAREN = "(" 
+    LEFT_PAREN = "("
     RIGHT_PAREN = ")"
-    LEFT_BRACE = "{" 
+    LEFT_BRACE = "{"
     RIGHT_BRACE = "}"
-    COMMA = "," 
+    COMMA = ","
     DOT = "."
     MINUS = "-"
     PLUS = "+"
@@ -18,34 +18,34 @@ class TokenType(Enum, str):
     # One or two character tokens.
     BANG = "!"
     BANG_EQUAL = "!="
-    EQUAL = "=" 
+    EQUAL = "="
     EQUAL_EQUAL = "=="
-    GREATER = ">" 
+    GREATER = ">"
     GREATER_EQUAL = ">="
-    LESS = "<" 
+    LESS = "<"
     LESS_EQUAL = "<="
 
     # Literals.
-    IDENTIFIER = 1
-    STRING = 2 
-    NUMBER = 3
+    IDENTIFIER = "1"
+    STRING = "2"
+    NUMBER = "3"
 
     # Keywords.
-    AND = "and" 
+    AND = "and"
     CLASS = "class"
-    ELSE = "else" 
+    ELSE = "else"
     FALSE = "false"
-    FUN = "fun" 
-    FOR = "for" 
-    IF = "if" 
-    NIL = "nil" 
+    FUN = "fun"
+    FOR = "for"
+    IF = "if"
+    NIL = "nil"
     OR = "or"
     PRINT = "print"
-    RETURN = "return" 
-    SUPER = "super" 
-    THIS = "this" 
-    TRUE = "true" 
-    VAR = "var" 
+    RETURN = "return"
+    SUPER = "super"
+    THIS = "this"
+    TRUE = "true"
+    VAR = "var"
     WHILE = "while"
 
     EOF = "EOF"
